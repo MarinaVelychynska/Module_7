@@ -65,3 +65,29 @@ if __name__ == "__main__":
    action = input("Обрати тип контакту, з яким потрібен зв'язок:\n1. Особистий номер\n2. Робочий номер\n")
 
 contact(action)
+
+from faker import Faker
+faker = Faker()
+
+def BaseContact():
+    for i in range(6):
+        name = faker.first_name()
+        surname = faker.last_name()
+        email = faker.email()
+        phone_number = faker.phone_number()
+        print(f'{name}, {surname}, {email}, {phone_number}')
+
+BaseContact()
+
+def BusinessContact():
+    for i in range(6):
+        name = faker.first_name()
+        surname = faker.last_name()
+        email = faker.email()
+        phone_number = faker.phone_number()
+        company = faker.company()
+        job = faker.job()
+
+        print(f'{name}, {surname}, {email}, {phone_number}, {company}, {job}')
+
+BusinessContact()

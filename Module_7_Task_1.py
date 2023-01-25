@@ -1,93 +1,74 @@
 class Card:
-   def __init__(self, name, surname, mail):
+   def __init__(self, name, email, phone_number):
        self.name = name
-       self.surname = surname
-       self.mail = mail
-   
+       self.email = email
+       self.phone_number = phone_number
+
    def __str__(self):
-    return f"{self.name} {self.surname} {self.mail}"
+    return f"{self.name} {self.email} {self.phone_number}"
 
-card_1 = Card(name="Ian", surname="Corcoran", mail="IanJCorcoran@rhyta.com")
-card_2 = Card(name="Olga", surname="Cape", mail="OlgaRCape@rhyta.com")
-card_3 = Card(name="Daniel", surname="Lazarus", mail="DanielMLazarus@jourrapide.com")
-card_4 = Card(name="William", surname="Espinoza", mail="WilliamDEspinoza@armyspy.com")
-card_5 = Card(name="Tanja", surname="Guthrie", mail="TanjaJGuthrie@teleworm.us")
+   def __repr__(self):
+    return f"{self.name} {self.email} {self.phone_number}"
 
-cards_list = [card_1, card_2, card_3, card_4, card_5]
-for i in cards_list:
-     print(i)
+   @property
+   def name_length(self):
+    return len(self.name)
 
 class BaseContact(Card):
-    def __init__(self, phone_number, *args, **kwargs):
-        super().__init__(*args,**kwargs)
-        self.phone_number = phone_number
+    def __init__(self, name, email, phone_number):
+       self.name = name
+       self.email = email
+       self.phone_number = phone_number
     
-    def __str__(self):
-     return f"{self.name} {self.surname} {self.mail} {self.phone_number}"
-       
-    @property
-    def name_length(self):
-        length = self.name+self.surname
-        return len(length)
-
-
-card_x = BaseContact(name="Ian", surname="Corcoran", mail="IanJCorcoran@rhyta.com", phone_number="+48656788221")
-
-print(card_x)
+    def contact(self):
+        print(f"Я телефоную по номеру {self.phone_number} та звязуюсь з {self.name}")
 
 class BusinessContact(Card):
-    def __init__(self, job, company, company_number, *args, **kwargs):
-        super().__init__(*args,**kwargs)
-        self.job = job
-        self.company = company
-        self.company_number = company_number
+     def __init__(self, name, email, phone_number, job, company):
+       self.name = name
+       self.email = email
+       self.phone_number = phone_number
+       self.job = job
+       self.company = company
+       
+     def __str__(self):
+      return f"{self.name} {self.email} {self.phone_number} {self.job} {self.company}"
 
-    def __str__(self):
-     return f"{self.name} {self.surname} {self.mail} {self.job} {self.company} {self.company_number}"
-    
-    @property
-    def name_length(self):
-        length = self.name+self.surname
-        return len(length)
+     def __repr__(self):
+      return f"{self.name} {self.email} {self.phone_number} {self.job} {self.company}"
 
-card_y = BusinessContact(name="Ian", surname="Corcoran", mail="IanJCorcoran@rhyta.com", job="Construction manager", company="Jay Jacobs", company_number="+48905376899")
-
-print(card_y)
-
-def contact(action):
-    if action == "1": 
-          print(f"Я набираю {card_x.phone_number} та зв'язуюсь з {card_x.name}, що має довжину імені та фаміліі {card_x.name_length} літер. ")
-
-    elif action == "2":
-       print(f"Я набираю {card_y.company_number} та зв'язуюсь з {card_y.name}, що має довжину імені та фаміліі {card_y.name_length} літер. ")
-
-if __name__ == "__main__":
-   action = input("Обрати тип контакту, з яким потрібен зв'язок:\n1. Особистий номер\n2. Робочий номер\n")
-
-contact(action)
+     def contact(self):
+        print(f"Я телефоную по номеру {self.phone_number} та звязуюсь з {self.name}")
 
 from faker import Faker
 faker = Faker()
 
-def BaseContact():
-    for i in range(6):
-        name = faker.first_name()
-        surname = faker.last_name()
-        email = faker.email()
-        phone_number = faker.phone_number()
-        print(f'{name}, {surname}, {email}, {phone_number}')
+card = BaseContact(name = faker.name(), email = faker.email(), phone_number = faker.phone_number())
 
-BaseContact()
+card_2 = BusinessContact(name = faker.name(), email = faker.email(), job = faker.job(), company = faker.company(), phone_number = faker.phone_number())
 
-def BusinessContact():
-    for i in range(6):
-        name = faker.first_name()
-        surname = faker.last_name()
-        email = faker.email()
-        phone_number = faker.phone_number()
-        company = faker.company()
-        job = faker.job()
+card = []
+card_2 = []
 
-        print(f'{name}, {surname}, {email}, {phone_number}, {company}, {job}')
+def create_contact(quantity:int,type):
+ for i in range(quantity):
 
-BusinessContact()
+   card.append(BaseContact(name = faker.name(), email = faker.email(), phone_number = faker.phone_number()))
+
+   card_2.append(BusinessContact(name = faker.name(), email = faker.email(), job = faker.job(), company = faker.company(), phone_number = faker.phone_number()))
+ 
+ if type == "1": 
+  for i in range(quantity):
+   if quantity > 0:
+    print (str(card[i]))
+
+ elif type =="2":
+  for i in range(quantity):
+   if quantity > 0:
+    print (str(card_2[i]))
+
+if __name__ == "__main__": 
+ type = input("Оберіть тип візитки:\n1. Особиста\n2. Робоча\n")
+ quantity = int(input("Введіть кількість контактів: "))
+
+ create_contact(quantity,type)

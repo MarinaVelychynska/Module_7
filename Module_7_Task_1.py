@@ -72,3 +72,4 @@ if __name__ == "__main__":
  quantity = int(input("Введіть кількість контактів: "))
 
  create_contact(quantity,type)
+    

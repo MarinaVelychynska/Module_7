@@ -46,15 +46,11 @@ faker = Faker()
 def create_contact(quantity:int,type):
 
  if type == "1": 
-  card = []
-  card.append(BaseContact(name = faker.name(), email = faker.email(), phone_number = faker.phone_number()))
   for i in range(quantity):
    if quantity > 0:
     print(BaseContact(faker.name(), faker.email(), faker.phone_number()))
     
  elif type == "2":
-  card_2 = [] 
-  card_2.append(BusinessContact(name = faker.name(), email = faker.email(), job = faker.job(), company = faker.company(), phone_number = faker.phone_number()))
   for i in range(quantity):
    if quantity > 0:
     print(BusinessContact(faker.name(), faker.email(), faker.phone_number(), faker.job(), faker.company()))

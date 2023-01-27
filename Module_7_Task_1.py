@@ -43,20 +43,25 @@ class BusinessContact(Card):
 from faker import Faker
 faker = Faker()
 
-card = Card(name = faker.name(), email = faker.email(), phone_number = faker.phone_number())
-card = []
+def create_contact(quantity:int,type):
 
-def create_contact(quantity:int):
- for i in range(quantity):
-
-   card.append(Card(name = faker.name(), email = faker.email(), phone_number = faker.phone_number()))
-
- for i in range(quantity):
-  if quantity > 0:
-    print (str(card[i]))
+ if type == "1": 
+  card = []
+  card.append(BaseContact(name = faker.name(), email = faker.email(), phone_number = faker.phone_number()))
+  for i in range(quantity):
+   if quantity > 0:
+    print(BaseContact(faker.name(), faker.email(), faker.phone_number()))
+    
+ elif type == "2":
+  card_2 = [] 
+  card_2.append(BusinessContact(name = faker.name(), email = faker.email(), job = faker.job(), company = faker.company(), phone_number = faker.phone_number()))
+  for i in range(quantity):
+   if quantity > 0:
+    print(BusinessContact(faker.name(), faker.email(), faker.phone_number(), faker.job(), faker.company()))
 
 if __name__ == "__main__": 
+ type = input("Оберіть тип візитки:\n1. Особиста\n2. Робоча\n")
  quantity = int(input("Введіть кількість контактів: "))
 
- create_contact(quantity)
+ create_contact(quantity,type)
     

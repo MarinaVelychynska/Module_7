@@ -45,18 +45,16 @@ faker = Faker()
 
 def create_contact(quantity:int,type):
 
- if type == "1": 
-  for i in range(quantity):
-   if quantity > 0:
-    print(BaseContact(faker.name(), faker.email(), faker.phone_number()))
+ type = input("Оберіть тип візитки:\n1. Особиста\n2. Робоча\n")
+
+ for i in range(quantity):
+    if type == "1": 
+     print(BaseContact(faker.name(), faker.email(), faker.phone_number()))
     
- elif type == "2":
-  for i in range(quantity):
-   if quantity > 0:
-    print(BusinessContact(faker.name(), faker.email(), faker.phone_number(), faker.job(), faker.company()))
+    elif type == "2":
+     print(BusinessContact(faker.name(), faker.email(), faker.phone_number(), faker.job(), faker.company()))
 
 if __name__ == "__main__": 
- type = input("Оберіть тип візитки:\n1. Особиста\n2. Робоча\n")
  quantity = int(input("Введіть кількість контактів: "))
 
  create_contact(quantity,type)

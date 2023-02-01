@@ -47,19 +47,21 @@ def create_contact(quantity:int,type:str):
 
  type = input("Оберіть тип візитки:\n1. Особиста\n2. Робоча\n")
  
- card = []
- card.append(BaseContact(name = faker.name(), email = faker.email(), phone_number = faker.phone_number()))
- card_2 = [] 
- card_2.append(BusinessContact(name = faker.name(), email = faker.email(), job = faker.job(), company = faker.company(), phone_number = faker.phone_number()))
+ cards = []
  
  for i in range(quantity):
     if type == "1": 
-       print(BaseContact(faker.name(), faker.email(), faker.phone_number()))
+       object = (BaseContact(faker.name(), faker.email(), faker.phone_number()))
     
     elif type == "2":
-      print(BusinessContact(faker.name(), faker.email(), faker.job(), faker.company(), faker.phone_number()))
+      object = (BusinessContact(faker.name(), faker.email(), faker.job(), faker.company(), faker.phone_number()))
+
+ cards.append(object)
 
 if __name__ == "__main__": 
  quantity = int(input("Введіть кількість контактів: "))
 
  create_contact(quantity,type)
+ print(create_contact)
+
+ 

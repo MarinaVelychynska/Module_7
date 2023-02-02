@@ -16,14 +16,22 @@ class Filmlist:
     def __str__(self):
         return f"{self.title} {self.released_year}"
 
+class Movies:
+    def __init__(self, title, released_year, genre, count_views):
+        self.title = title
+        self.released_year = released_year
+        self.genre = genre   
+        self.count_views = count_views    
+
+
 # Функція, що виводить список фільмів
     def get_movies():
-         for movie in Filmlist:
+         for movie in Movies:
           print (movie)    
 
     def search():
         movie_title = input("ВВедіть назву фільму: ")
-        for movie in Filmlist:
+        for movie in Movies:
             if movie_title == movie.title:
              print(movie)   
        
@@ -63,7 +71,7 @@ def generate_views(type:str):
  
  for i in range(10):
     if type == "1": 
-       object = Filmlist(i)
+       object = Movies(i)
     
     elif type == "2":
       object = Serials(i)

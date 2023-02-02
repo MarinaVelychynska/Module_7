@@ -1,20 +1,5 @@
+import random
 print("Фільмотека:")
-
-class Filmlist:
-    def __init__(self, title, released_year, genre, count_views):
-        self.title = title
-        self.released_year = released_year
-        self.genre = genre   
-        self.count_views = count_views    
-
-
-# Метод play, який збільшує кількість переглядів певної назви на 1.
-    def play(self, views=1):
-        self.count_views +=views
-
-# Після відображення фільму, як string, показується назва та рік випуску
-    def __str__(self):
-        return f"{self.title} {self.released_year}"
 
 class Movies:
     def __init__(self, title, released_year, genre, count_views):
@@ -23,6 +8,13 @@ class Movies:
         self.genre = genre   
         self.count_views = count_views    
 
+# Метод play, який збільшує кількість переглядів певної назви на 1.
+    def play(self, views=1):
+        self.count_views +=views
+
+# Після відображення фільму, як string, показується назва та рік випуску
+    def __str__(self):
+        return f"{self.title} {self.released_year}"
 
 # Функція, що виводить список фільмів
     def get_movies():
@@ -35,13 +27,14 @@ class Movies:
             if movie_title == movie.title:
              print(movie)   
        
-movie_1 = Filmlist(title="Avatar: The Way of Water", released_year="2022", genre="Fantasy", count_views="120000")
-movie_2 = Filmlist(title="The Batman", released_year="2022", genre="Action", count_views="80000")
-movie_3 = Filmlist(title="Bullet Train", released_year="2022", genre="Action", count_views="99000")
-movie_4 = Filmlist(title="Watcher", released_year="2022", genre="Drama", count_views="60000")
-movie_5 = Filmlist(title="House of Gucci", released_year="2021", genre="Drama", count_views="200000")
+movie_1 = Movies(title="Avatar: The Way of Water", released_year="2022", genre="Fantasy", count_views="120000")
+movie_2 = Movies(title="The Batman", released_year="2022", genre="Action", count_views="80000")
+movie_3 = Movies(title="Bullet Train", released_year="2022", genre="Action", count_views="99000")
+movie_4 = Movies(title="Watcher", released_year="2022", genre="Drama", count_views="60000")
+movie_5 = Movies(title="House of Gucci", released_year="2021", genre="Drama", count_views="200000")
 
-class Serials(Filmlist):
+
+class Serials(Movies):
     def __init__(self, series_number, season_number, *args, **kwargs):
         super().__init__(*args,**kwargs)
         self.series_number = series_number
@@ -63,23 +56,17 @@ serial_4 = Serials(title="Money Heist", released_year="2017", genre="Thriller", 
 serial_5 = Serials(title="The Black List", released_year="2013", genre="Detective", series_number="08", season_number="06", count_views="200000")
 
 
-def generate_views(type:str):
+class Filmlist:
+    def __init__(self, film_list:list):
+        self.film_list: list[Movies, Serials] = film_list
 
- type = input("Оберіть, що бажаєте переглянути :\n1. Фільм\n2. Серіал\n")
- 
- film_list = []
- 
- for i in range(10):
-    if type == "1": 
-       object = Movies(i)
-    
-    elif type == "2":
-      object = Serials(i)
+    def __str__(self):
+        return f"{self.film_list}"
 
- film_list.append(object)
- 
- generate_views()
- print(generate_views)
-
+    def generate_views(self):
+     film_list_views: int = random.randint(1,100)
+     random_view = random.choice(self.film_list)
+     print(random_view, film_list_views)
+     random_view.add(film_list_views)
 
 

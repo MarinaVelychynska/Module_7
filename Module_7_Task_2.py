@@ -16,16 +16,6 @@ class Movies:
     def __str__(self):
         return f"{self.title} {self.released_year}"
 
-# Функція, що виводить список фільмів
-    def get_movies():
-         for movie in Movies:
-          print (movie)    
-
-    def search():
-        movie_title = input("ВВедіть назву фільму: ")
-        for movie in Movies:
-            if movie_title == movie.title:
-             print(movie)   
        
 movie_1 = Movies(title="Avatar: The Way of Water", released_year="2022", genre="Fantasy", count_views="120000")
 movie_2 = Movies(title="The Batman", released_year="2022", genre="Action", count_views="80000")
@@ -44,10 +34,6 @@ class Serials(Movies):
     def __str__(self):
      return f"{self.title} S: {self.season_number}, E - {self.series_number}"
 
-# Функція, що виводить список серіалів
-    def get_series():
-     for serial in Serials():
-        print(serial)
      
 serial_1 = Serials(title="Wednesday", released_year="2022", genre="Mysteries", series_number="05", season_number="01", count_views="350000")
 serial_2 = Serials(title="House of the Dragon", released_year="2022", genre="Drama", series_number="01", season_number="01", count_views="250000")
@@ -62,6 +48,23 @@ class Filmlist:
 
     def __str__(self):
         return f"{self.film_list}"
+    
+# Функція, що виводить список фільмів
+    def get_movies():
+         for movie in Filmlist:
+          print (movie)    
+
+# Функція пошуку:
+    def search():
+        movie_title = input("ВВедіть назву фільму: ")
+        for movie in Filmlist:
+            if movie_title == movie.title:
+             print(movie)   
+
+# Функція, що виводить список серіалів
+    def get_series():
+     for serial in Filmlist():
+        print(serial)
 
     def generate_views(self):
      film_list_views: int = random.randint(1,100)
